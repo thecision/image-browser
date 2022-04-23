@@ -1,13 +1,19 @@
-import Grid from '@mui/material/Grid';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
 const ImagesContainer = () => {
   return (
-    <Grid container spacing={2} columns={5}>
+    <ImageList cols={5}>
       {Array.from({ length: 10 }).map((_, index) => (
-        <Grid item xs={1} key={index}>
-          img
-        </Grid>
+        <ImageListItem key={index}>
+          <img
+            src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
+            alt="Alt text"
+            loading="lazy"
+          />
+        </ImageListItem>
       ))}
-    </Grid>
+    </ImageList>
   );
 };
 
