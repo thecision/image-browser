@@ -5,11 +5,12 @@ const PaginationContainer = () => {
   };
   return (
     <TablePagination
-      rowsPerPageOptions={[10, 25, 50]}
-      rowsPerPage={10}
-      page={0}
+      component="div"
       count={20}
+      page={0}
       onPageChange={onPageChange}
+      rowsPerPage={10}
+      rowsPerPageOptions={[10, 25, 50]}
     />
   );
 };
