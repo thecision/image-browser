@@ -1,14 +1,17 @@
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 import ImagesContainer from './ImagesContainer';
 import PaginationContainer from './PaginationContainer';
 import SearchContainer from './SearchContainer';
 
 function App() {
   return (
-    <div className="App">
+    <Container>
+      <CssBaseline />
       <SearchContainer />
       <ImagesContainer />
       <PaginationContainer />
-    </div>
+    </Container>
   );
 }
 

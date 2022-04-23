@@ -1,5 +1,7 @@
+import TextField from '@mui/material/TextField';
+
 const SearchContainer = () => {
-  return <div>Search</div>;
+  return <TextField value="hired developer" />;
 };
 
 export default SearchContainer;
