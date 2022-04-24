@@ -41,14 +41,14 @@ function App() {
   }, [imagesPerPage, searchPhrase, pageNumber]);
 
   return (
-    <Container>
+    <>
       <CssBaseline />
       <SearchContainer
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
       />
       {!isLoading ? (
-        <>
+        <Container>
           <ImagesContainer images={images} />
           <PaginationContainer
             imageCount={imageCount}
@@ -57,11 +57,11 @@ function App() {
             imagesPerPage={imagesPerPage}
             setImagesPerPage={setImagesPerPage}
           />
-        </>
+        </Container>
       ) : (
         <LinearProgress />
       )}
-    </Container>
+    </>
   );
 }
 

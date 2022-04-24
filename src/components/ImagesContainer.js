@@ -6,7 +6,7 @@ const ImagesContainer = ({ images }) => {
   return (
     <>
       {images.length > 0 ? (
-        <ImageList cols={5}>
+        <ImageList cols={5} gap={14}>
           {images.map((image) => (
             <ImageListItem key={image.id}>
               <img src={image.src.portrait} alt={image.alt} loading="lazy" />
