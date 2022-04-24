@@ -22,20 +22,25 @@ function App() {
   };
 
   useEffect(() => {
-    api
-      .get(
-        `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}`
-      )
-      .then(({ data }) => {
-        processFetchedData(data);
-      })
-      .catch((error) => console.log('Oh noes, error: ', error));
+    if (searchPhrase.length) {
+      api
+        .get(
+          `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}`
+        )
+        .then(({ data }) => {
+          processFetchedData(data);
+        })
+        .catch((error) => console.log('Oh noes, error: ', error));
+    }
   }, [imagesPerPage, searchPhrase]);
 
   return (
     <Container>
       <CssBaseline />
-      <SearchContainer searchPhrase={searchPhrase} />
+      <SearchContainer
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+      />
       {images.length > 0 && <ImagesContainer images={images} />}
 
       <PaginationContainer imageCount={imageCount} pageNumber={pageNumber} />
