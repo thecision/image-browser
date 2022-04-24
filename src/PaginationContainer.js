@@ -1,13 +1,13 @@
 import TablePagination from '@mui/material/TablePagination';
-const PaginationContainer = () => {
+const PaginationContainer = ({ imageCount, pageNumber }) => {
   const onPageChange = () => {
     console.log('Page changed');
   };
   return (
     <TablePagination
       component="div"
-      count={20}
-      page={0}
+      count={imageCount}
+      page={pageNumber}
       onPageChange={onPageChange}
       rowsPerPage={10}
       rowsPerPageOptions={[10, 25, 50]}

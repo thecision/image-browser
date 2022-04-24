@@ -3,14 +3,42 @@ import Container from '@mui/material/Container';
 import ImagesContainer from './ImagesContainer';
 import PaginationContainer from './PaginationContainer';
 import SearchContainer from './SearchContainer';
+import { useEffect, useState } from 'react';
+import api from './api';
 
 function App() {
+  const [searchPhrase, setSearchPhrase] = useState('mountain');
+
+  const [images, setImages] = useState([]);
+  const [imageCount, setImageCount] = useState(0);
+
+  // pagination component
+  const [imagesPerPage, setImagesPerPage] = useState(10);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const processFetchedData = ({ total_results, photos }) => {
+    setImageCount(total_results);
+    setImages(photos);
+  };
+
+  useEffect(() => {
+    api
+      .get(
+        `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}`
+      )
+      .then(({ data }) => {
+        processFetchedData(data);
+      })
+      .catch((error) => console.log('Oh noes, error: ', error));
+  }, [imagesPerPage, searchPhrase]);
+
   return (
     <Container>
       <CssBaseline />
-      <SearchContainer />
-      <ImagesContainer />
-      <PaginationContainer />
+      <SearchContainer searchPhrase={searchPhrase} />
+      {images.length > 0 && <ImagesContainer images={images} />}
+
+      <PaginationContainer imageCount={imageCount} pageNumber={pageNumber} />
     </Container>
   );
 }

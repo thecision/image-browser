@@ -1,10 +1,10 @@
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
-const SearchContainer = () => {
+const SearchContainer = ({ searchPhrase }) => {
   return (
     <Box py={8}>
-      <TextField fullWidth value="hired developer" />
+      <TextField fullWidth defaultValue={searchPhrase} />
     </Box>
   );
 };
