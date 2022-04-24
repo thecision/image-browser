@@ -1,7 +1,16 @@
 import TablePagination from '@mui/material/TablePagination';
-const PaginationContainer = ({ imageCount, pageNumber }) => {
-  const onPageChange = () => {
-    console.log('Page changed');
+const PaginationContainer = ({
+  imageCount,
+  pageNumber,
+  setPageNumber,
+  imagesPerPage,
+  setImagesPerPage,
+}) => {
+  const onPageChange = (_, page) => {
+    setPageNumber(page);
+  };
+  const onRowsPerPageChange = (event) => {
+    setImagesPerPage(event.target.value);
   };
   return (
     <TablePagination
@@ -9,7 +18,8 @@ const PaginationContainer = ({ imageCount, pageNumber }) => {
       count={imageCount}
       page={pageNumber}
       onPageChange={onPageChange}
-      rowsPerPage={10}
+      onRowsPerPageChange={onRowsPerPageChange}
+      rowsPerPage={imagesPerPage}
       rowsPerPageOptions={[10, 25, 50]}
     />
   );

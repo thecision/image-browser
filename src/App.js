@@ -23,16 +23,17 @@ function App() {
 
   useEffect(() => {
     if (searchPhrase.length) {
+      const pageNum = pageNumber + 1;
       api
         .get(
-          `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}`
+          `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}&page=${pageNum}`
         )
         .then(({ data }) => {
           processFetchedData(data);
         })
         .catch((error) => console.log('Oh noes, error: ', error));
     }
-  }, [imagesPerPage, searchPhrase]);
+  }, [imagesPerPage, searchPhrase, pageNumber]);
 
   return (
     <Container>
@@ -43,7 +44,13 @@ function App() {
       />
       {images.length > 0 && <ImagesContainer images={images} />}
 
-      <PaginationContainer imageCount={imageCount} pageNumber={pageNumber} />
+      <PaginationContainer
+        imageCount={imageCount}
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        imagesPerPage={imagesPerPage}
+        setImagesPerPage={setImagesPerPage}
+      />
     </Container>
   );
 }
