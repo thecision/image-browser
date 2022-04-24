@@ -1,11 +1,11 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
-import ImagesContainer from './ImagesContainer';
-import PaginationContainer from './PaginationContainer';
-import SearchContainer from './SearchContainer';
+import ImagesContainer from './components/ImagesContainer';
+import PaginationContainer from './components/PaginationContainer';
+import SearchContainer from './components/SearchContainer';
 import { useEffect, useState } from 'react';
-import api from './api';
+import api from './api/api';
 
 function App() {
   const [searchPhrase, setSearchPhrase] = useState('mountain');
