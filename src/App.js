@@ -1,5 +1,6 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import LinearProgress from '@mui/material/LinearProgress';
 import ImagesContainer from './ImagesContainer';
 import PaginationContainer from './PaginationContainer';
 import SearchContainer from './SearchContainer';
@@ -16,6 +17,8 @@ function App() {
   const [imagesPerPage, setImagesPerPage] = useState(10);
   const [pageNumber, setPageNumber] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const processFetchedData = ({ total_results, photos }) => {
     setImageCount(total_results);
     setImages(photos);
@@ -24,6 +27,7 @@ function App() {
   useEffect(() => {
     if (searchPhrase.length) {
       const pageNum = pageNumber + 1;
+      setIsLoading(true);
       api
         .get(
           `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}&page=${pageNum}`
@@ -31,7 +35,8 @@ function App() {
         .then(({ data }) => {
           processFetchedData(data);
         })
-        .catch((error) => console.log('Oh noes, error: ', error));
+        .catch((error) => console.error(error))
+        .finally(() => setIsLoading(false));
     }
   }, [imagesPerPage, searchPhrase, pageNumber]);
 
@@ -42,15 +47,20 @@ function App() {
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
       />
-      {images.length > 0 && <ImagesContainer images={images} />}
-
-      <PaginationContainer
-        imageCount={imageCount}
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        imagesPerPage={imagesPerPage}
-        setImagesPerPage={setImagesPerPage}
-      />
+      {!isLoading ? (
+        <>
+          <ImagesContainer images={images} />
+          <PaginationContainer
+            imageCount={imageCount}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            imagesPerPage={imagesPerPage}
+            setImagesPerPage={setImagesPerPage}
+          />
+        </>
+      ) : (
+        <LinearProgress />
+      )}
     </Container>
   );
 }
