@@ -22,6 +22,7 @@ const PaginationContainer = ({
       onRowsPerPageChange={onRowsPerPageChange}
       rowsPerPage={imagesPerPage}
       rowsPerPageOptions={[10, 25, 50]}
+      labelRowsPerPage="Images per page"
     />
   );
 };
