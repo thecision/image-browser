@@ -1,4 +1,5 @@
 import TablePagination from '@mui/material/TablePagination';
+
 const PaginationContainer = ({
   imageCount,
   pageNumber,

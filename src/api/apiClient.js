@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-export default axios.create({
+const apiClient = axios.create({
   headers: {
     Authorization: process.env.REACT_APP_API_KEY,
   },
 });
+
+export default apiClient;

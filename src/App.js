@@ -5,7 +5,7 @@ import ImagesContainer from './components/ImagesContainer';
 import PaginationContainer from './components/PaginationContainer';
 import SearchContainer from './components/SearchContainer';
 import { useEffect, useState } from 'react';
-import api from './api/api';
+import apiClient from './api/apiClient';
 
 function App() {
   const [searchPhrase, setSearchPhrase] = useState('mountain');
@@ -28,7 +28,7 @@ function App() {
     if (searchPhrase.length) {
       const pageNum = pageNumber + 1;
       setIsLoading(true);
-      api
+      apiClient
         .get(
           `https://api.pexels.com/v1/search?query=${searchPhrase}&per_page=${imagesPerPage}&page=${pageNum}`
         )
